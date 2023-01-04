@@ -9,25 +9,25 @@ function App() {
       <div className='output'>
         <div className='operand'>1</div>
       </div>
-      <button>AC</button>
-      <button>+/-</button>
-      <button>%</button>
-      <button>÷</button>
-      <button>7</button>
-      <button>8</button>
-      <button>9</button>
-      <button>x</button>
-      <button>4</button>
-      <button>5</button>
-      <button>6</button>
-      <button>-</button>
-      <button>1</button>
-      <button>2</button>
-      <button>3</button>
-      <button>+</button>
-      <button className='span-two'>0</button>
-      <button>.</button>
-      <button>=</button>
+      <button className='light-gray'>AC</button>
+      <button className='light-gray'>+/-</button>
+      <button className='light-gray'>%</button>
+      <button className='orange'>÷</button>
+      <button className='dark-gray'>7</button>
+      <button className='dark-gray'>8</button>
+      <button className='dark-gray'>9</button>
+      <button className='orange'>x</button>
+      <button className='dark-gray'>4</button>
+      <button className='dark-gray'>5</button>
+      <button className='dark-gray'>6</button>
+      <button className='orange'>-</button>
+      <button className='dark-gray'>1</button>
+      <button className='dark-gray'>2</button>
+      <button className='dark-gray'>3</button>
+      <button className='orange'>+</button>
+      <button className='span-two dark-gray'>0</button>
+      <button className='dark-gray'>.</button>
+      <button className='orange'>=</button>
     </div>
     </>
     
