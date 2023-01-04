@@ -28,8 +28,7 @@ body {
   font-size:2rem;
 }
 
-.calculator-container > button:hover,
-.calculator-container > button:focus {
+.calculator-container > button:hover {
   background-color: white;
 }
 
