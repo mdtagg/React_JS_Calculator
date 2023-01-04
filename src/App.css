@@ -38,12 +38,13 @@ body {
   display:flex;
   justify-content: flex-end;
   align-items:flex-end;
-  padding:1.5rem;
+  padding:1.25rem;
 }
 
 .operand {
   color:white;
-  font-size:2rem;
+  font-size:3rem;
+  font-family:Roboto;
 }
 
 .span-two {
