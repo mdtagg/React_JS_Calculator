@@ -40,7 +40,17 @@ function reducer(state,{type,payload}) {
       }
     case ACTIONS.ALL_CLEAR:
       return {}
+    case ACTIONS.PLUS_MINUS:
+      return {
+        ...state,
+        operand: changeValue(state)
+      }
   }
+}
+
+function changeValue({operand}) {
+  let newOperand = parseFloat(operand)
+  return (newOperand * -1).toString()
 }
 
 function evaluate({operand,previousOperand,operation}) {
@@ -76,7 +86,7 @@ function App() {
         <div className='operand'>{operand}</div>
       </div>
       <button className='light-gray' onClick={() => dispatch({type:ACTIONS.ALL_CLEAR})}>AC</button>
-      <button className='light-gray'>+/-</button>
+      <button className='light-gray' onClick={() => dispatch({type:ACTIONS.PLUS_MINUS})}>+/-</button>
       <button className='light-gray'>%</button>
       <OperationButton className='orange' operation='÷' dispatch={dispatch} />
       <DigitButton className='dark-gray' digit='7' dispatch={dispatch} />
