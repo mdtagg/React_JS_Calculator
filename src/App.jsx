@@ -6,7 +6,8 @@ import './App.css'
 export const ACTIONS = {
   ADD_DIGIT: 'add-digit',
   CHOOSE_OPERATION: 'choose-operation',
-  EVALUATE: 'evaluate'
+  EVALUATE: 'evaluate',
+  ALL_CLEAR: 'all-clear'
 }
 
 function reducer(state,{type,payload}) {
@@ -16,7 +17,6 @@ function reducer(state,{type,payload}) {
         return {
           ...state,
           previousOperand: state.operand,
-          // operation:null,
           operand: `${payload.digit}`,
           overwrite:false
         }
@@ -38,6 +38,8 @@ function reducer(state,{type,payload}) {
         previousOperand: null,
         operation:null
       }
+    case ACTIONS.ALL_CLEAR:
+      return {}
   }
 }
 
@@ -73,7 +75,7 @@ function App() {
       <div className='output'>
         <div className='operand'>{operand}</div>
       </div>
-      <button className='light-gray'>AC</button>
+      <button className='light-gray' onClick={() => dispatch({type:ACTIONS.ALL_CLEAR})}>AC</button>
       <button className='light-gray'>+/-</button>
       <button className='light-gray'>%</button>
       <OperationButton className='orange' operation='÷' dispatch={dispatch} />
