@@ -1,13 +1,14 @@
 import { useReducer } from 'react'
 import DigitButton from './DigitButton'
 import OperationButton from './OperationButton'
+import ChangeOperandButton from './ChangeOperandButton'
 import './App.css'
 
 export const ACTIONS = {
   ADD_DIGIT: 'add-digit',
   CHOOSE_OPERATION: 'choose-operation',
-  EVALUATE: 'evaluate',
-  ALL_CLEAR: 'all-clear'
+  CHANGE_OPERAND: 'change-operand',
+  EVALUATE: 'evaluate'
 }
 
 function reducer(state,{type,payload}) {
@@ -31,6 +32,14 @@ function reducer(state,{type,payload}) {
         overwrite:true,
         operation: payload.operation
       }
+    case ACTIONS.CHANGE_OPERAND:
+      if(payload.action === 'AC') {
+        return {}
+      }
+      return {
+        ...state,
+        operand: changeOperand(state,payload.action)
+      }
     case ACTIONS.EVALUATE:
       return {
         ...state,
@@ -38,19 +47,19 @@ function reducer(state,{type,payload}) {
         previousOperand: null,
         operation:null
       }
-    case ACTIONS.ALL_CLEAR:
-      return {}
-    case ACTIONS.PLUS_MINUS:
-      return {
-        ...state,
-        operand: changeValue(state)
-      }
   }
 }
 
-function changeValue({operand}) {
+function changeOperand({operand},payload) {
+  console.log(payload)
   let newOperand = parseFloat(operand)
-  return (newOperand * -1).toString()
+  switch(payload) {
+    case '+/-':
+      return (newOperand * -1).toString()
+    case '%':
+      return (newOperand * .01).toString()
+  }
+  
 }
 
 function evaluate({operand,previousOperand,operation}) {
@@ -85,9 +94,9 @@ function App() {
       <div className='output'>
         <div className='operand'>{operand}</div>
       </div>
-      <button className='light-gray' onClick={() => dispatch({type:ACTIONS.ALL_CLEAR})}>AC</button>
-      <button className='light-gray' onClick={() => dispatch({type:ACTIONS.PLUS_MINUS})}>+/-</button>
-      <button className='light-gray'>%</button>
+      <ChangeOperandButton className='light-gray' action='AC' dispatch={dispatch} />
+      <ChangeOperandButton className='light-gray' action='+/-' dispatch={dispatch} />
+      <ChangeOperandButton className='light-gray' action='%' dispatch={dispatch} />
       <OperationButton className='orange' operation='÷' dispatch={dispatch} />
       <DigitButton className='dark-gray' digit='7' dispatch={dispatch} />
       <DigitButton className='dark-gray' digit='8' dispatch={dispatch} />
