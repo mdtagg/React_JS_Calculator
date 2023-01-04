@@ -63,6 +63,11 @@ body {
   color:white;
 }
 
+.orange:focus {
+  background-color:white;
+  color:rgb(251, 164, 2)
+}
+
 .dark-gray {
   background-color:rgb(69, 69, 69);
   color:white;
