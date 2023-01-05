@@ -14,6 +14,12 @@ export const ACTIONS = {
 function reducer(state,{type,payload}) {
   switch(type) {
     case ACTIONS.ADD_DIGIT:
+      if(state.operand == null && payload.digit === '.') {
+        return {
+          ...state,
+          operand: `0.`
+        }
+      }
       if(state.overwrite) {
         return {
           ...state,
@@ -22,9 +28,12 @@ function reducer(state,{type,payload}) {
           overwrite:false
         }
       }
+      if(state.operand === '0' && payload.digit === '0') {
+        return state
+      }
       return {
         ...state,
-        operand: `${state.operand || ''}${payload.digit}`
+        operand: `${state.operand || ''}${payload.digit}`,
       }
     case ACTIONS.CHOOSE_OPERATION:
       return {
@@ -41,6 +50,11 @@ function reducer(state,{type,payload}) {
         operand: changeOperand(state,payload.action)
       }
     case ACTIONS.EVALUATE:
+      if(state.operand == null ||
+        state.previousOperand == null ||
+        state.operation == null) {
+          return state
+        }
       return {
         ...state,
         operand: evaluate(state),
@@ -51,7 +65,6 @@ function reducer(state,{type,payload}) {
 }
 
 function changeOperand({operand},payload) {
-  console.log(payload)
   let newOperand = parseFloat(operand)
   switch(payload) {
     case '+/-':
@@ -59,7 +72,6 @@ function changeOperand({operand},payload) {
     case '%':
       return (newOperand * .01).toString()
   }
-  
 }
 
 function evaluate({operand,previousOperand,operation}) {
@@ -86,7 +98,7 @@ function evaluate({operand,previousOperand,operation}) {
 
 function App() {
 
-  const [{operand,previousOperand,operation},dispatch] = useReducer(reducer,{})
+  const [{operand='0',previousOperand,operation},dispatch] = useReducer(reducer,{})
 
   return (
     <>
