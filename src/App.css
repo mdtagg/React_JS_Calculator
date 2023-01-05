@@ -27,6 +27,7 @@ body {
   border-radius:100%;
   margin:5px;
   font-size:2rem;
+  cursor:pointer;
 }
 
 .calculator-container > button:hover {
@@ -72,5 +73,10 @@ body {
 .dark-gray {
   background-color:rgb(69, 69, 69);
   color:white;
+}
+
+.dark-gray:focus {
+  background-color:white;
+  color:rgb(69, 69, 69)
 }
 

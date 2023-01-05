@@ -8,8 +8,8 @@ const clickIt = () => keyPress.current.click()
 
 useEffect(() => {
     window.addEventListener('keypress', e => {
-        // console.log(e)
         if(e.key == digit) {
+            keyPress.current.focus()
             clickIt()
         }
     })
