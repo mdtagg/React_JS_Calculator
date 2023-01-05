@@ -20,7 +20,10 @@ function reducer(state,{type,payload}) {
           operand: `0.`
         }
       }
-      if(state.overwrite) {
+      if(payload.digit === '.' && state.operand.includes('.')) {
+        return state
+      }
+      if(state.overwrite || state.operand === 'Error') {
         return {
           ...state,
           previousOperand: state.operand,
@@ -75,9 +78,12 @@ function changeOperand({operand},payload) {
 }
 
 function evaluate({operand,previousOperand,operation}) {
-  console.log([previousOperand,operand,operation])
   let prev = parseFloat(previousOperand)
   let currentOperand = parseFloat(operand)
+  if(isNaN(prev) || isNaN(currentOperand)) return ''
+  if(currentOperand === 0 && operation === '÷') {
+    return 'Error'
+  }
   let result = ''
   switch(operation) {
     case '÷':
@@ -96,6 +102,18 @@ function evaluate({operand,previousOperand,operation}) {
   return result.toString()
 }
 
+const INTEGER_FORMATTER = new Intl.NumberFormat('en-us', {
+  maximumFractionDigits:0
+})
+
+function formatOperand(operand) {
+  if(operand === 'Error') return 'Error'
+  if(operand == null) return 
+  let [integer,decimal] = operand.split('.')
+  if(decimal == null) return INTEGER_FORMATTER.format(integer)
+  return `${INTEGER_FORMATTER.format(integer)}.${decimal}`
+}
+
 function App() {
 
   const [{operand='0',previousOperand,operation},dispatch] = useReducer(reducer,{})
@@ -104,7 +122,7 @@ function App() {
     <>
     <div className='calculator-container'>
       <div className='output'>
-        <div className='operand'>{operand}</div>
+        <div className='operand'>{formatOperand(operand)}</div>
       </div>
       <ChangeOperandButton className='light-gray' action='AC' dispatch={dispatch} />
       <ChangeOperandButton className='light-gray' action='+/-' dispatch={dispatch} />
