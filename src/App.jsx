@@ -20,9 +20,6 @@ function reducer(state,{type,payload}) {
           operand: `0.`
         }
       }
-      if(payload.digit === '.' && state.operand.includes('.')) {
-        return state
-      }
       if(state.overwrite || state.operand === 'Error') {
         return {
           ...state,
@@ -31,7 +28,9 @@ function reducer(state,{type,payload}) {
           overwrite:false
         }
       }
-      if(state.operand === '0' && payload.digit === '0') {
+      if(payload.digit === '.' && state.operand.includes('.') ||
+         state.operand !== undefined && state.operand.length === 9 ||
+         state.operand === '0' && payload.digit === '0') {
         return state
       }
       return {
@@ -98,6 +97,10 @@ function evaluate({operand,previousOperand,operation}) {
     case 'x':
       result = prev * currentOperand
       break
+  }
+  if(result.toString().length > 9) {
+    console.log()
+    return result.toExponential(1).toString()
   }
   return result.toString()
 }
