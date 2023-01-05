@@ -83,7 +83,7 @@ function evaluate({operand,previousOperand,operation}) {
   if(currentOperand === 0 && operation === '÷') {
     return 'Error'
   }
-  let result = ''
+  let result = 0
   switch(operation) {
     case '÷':
       result = prev / currentOperand
@@ -98,11 +98,10 @@ function evaluate({operand,previousOperand,operation}) {
       result = prev * currentOperand
       break
   }
-  if(result.toString().length > 9) {
-    console.log()
-    return result.toExponential(1).toString()
-  }
-  return result.toString()
+  if(result.toString().length > 9 && !result.toString().includes('.')) {
+    return result.toExponential(6).toString()
+  } 
+  return result.toFixed(9).toString()
 }
 
 const INTEGER_FORMATTER = new Intl.NumberFormat('en-us', {
