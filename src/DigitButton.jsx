@@ -1,5 +1,9 @@
 import { ACTIONS } from './App'
 
+const getEventKey = (e) => {
+    console.log(e.key)
+  }
+
 function DigitButton({digit,dispatch,className}) {
     return (
         <button 

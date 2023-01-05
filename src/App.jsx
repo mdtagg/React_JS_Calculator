@@ -8,7 +8,7 @@ export const ACTIONS = {
   ADD_DIGIT: 'add-digit',
   CHOOSE_OPERATION: 'choose-operation',
   CHANGE_OPERAND: 'change-operand',
-  EVALUATE: 'evaluate'
+  EVALUATE: 'evaluate',
 }
 
 function reducer(state,{type,payload}) {
@@ -38,6 +38,15 @@ function reducer(state,{type,payload}) {
         operand: `${state.operand || ''}${payload.digit}`,
       }
     case ACTIONS.CHOOSE_OPERATION:
+      if(state.previousOperand != null && state.operand != null) {
+        return {
+          ...state,
+          overwrite:true,
+          operand: evaluate(state),
+          operation: payload.operation,
+          previousOperand: null
+        }
+      }
       return {
         ...state,
         overwrite:true,
@@ -101,7 +110,7 @@ function evaluate({operand,previousOperand,operation}) {
   if(result.toString().length > 9 && !result.toString().includes('.')) {
     return result.toExponential(6).toString()
   } 
-  return result.toFixed(9).toString()
+  return result.toString()
 }
 
 const INTEGER_FORMATTER = new Intl.NumberFormat('en-us', {
@@ -118,7 +127,7 @@ function formatOperand(operand) {
 
 function App() {
 
-  const [{operand='0',previousOperand,operation},dispatch] = useReducer(reducer,{})
+  const [{operand='0'},dispatch] = useReducer(reducer,{})
 
   return (
     <>
