@@ -1,4 +1,4 @@
-import { useReducer } from 'react'
+import { useReducer,useEffect,useRef } from 'react'
 import DigitButton from './DigitButton'
 import OperationButton from './OperationButton'
 import ChangeOperandButton from './ChangeOperandButton'
