@@ -61,6 +61,7 @@ function reducer(state,{type,payload}) {
         operand: changeOperand(state,payload.action)
       }
     case ACTIONS.EVALUATE:
+      console.log(state.operand,state.previousOperand,state.operation)
       if(state.operand == null ||
         state.previousOperand == null ||
         state.operation == null) {
@@ -118,6 +119,7 @@ const INTEGER_FORMATTER = new Intl.NumberFormat('en-us', {
 })
 
 function formatOperand(operand) {
+  console.log('operand',operand)
   if(operand === 'Error') return 'Error'
   if(operand == null) return 
   let [integer,decimal] = operand.split('.')
@@ -128,6 +130,18 @@ function formatOperand(operand) {
 function App() {
 
   const [{operand='0'},dispatch] = useReducer(reducer,{})
+  const keyPress = useRef()
+  const clickIt = () => keyPress.current.click()
+
+  useEffect(() => {
+    window.addEventListener('keydown', e => {
+      console.log(keyPress.current)
+      if(e.key === 'Enter') {
+        clickIt()
+        return () => console.log('test')
+      }
+    })
+  },[])
 
   return (
     <>
@@ -153,7 +167,7 @@ function App() {
       <OperationButton className='orange' operation='+' dispatch={dispatch} />
       <DigitButton className='span-two dark-gray' digit='0' dispatch={dispatch} />
       <DigitButton className='dark-gray' digit='.' dispatch={dispatch} />
-      <button className='orange' onClick={() => dispatch({type:ACTIONS.EVALUATE})}>=</button>
+      <button ref={keyPress} className='orange' onClick={() => dispatch({type:ACTIONS.EVALUATE})}>=</button>
     </div>
     </>
     
