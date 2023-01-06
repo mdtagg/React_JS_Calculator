@@ -3,17 +3,17 @@ import { useEffect,useRef } from 'react'
 
 function DigitButton({digit,dispatch,className}) {
 
-const keyPress = useRef()
-const clickIt = () => keyPress.current.click()
+    const keyPress = useRef()
+    const clickIt = () => keyPress.current.click()
 
-useEffect(() => {
-    window.addEventListener('keypress', e => {
-        if(e.key == digit) {
-            keyPress.current.focus()
-            clickIt()
-        }
-    })
-},[])
+    useEffect(() => {
+        window.addEventListener('keypress', e => {
+            if(e.key == digit) {
+                keyPress.current.focus()
+                clickIt()
+            }
+        })
+    },[])
 
     return (
         <button 

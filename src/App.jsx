@@ -130,24 +130,28 @@ function formatOperand(operand) {
 function App() {
 
   const [{operand='0'},dispatch] = useReducer(reducer,{})
+
   const keyPress = useRef()
   const clickIt = () => keyPress.current.click()
 
   useEffect(() => {
     window.addEventListener('keydown', e => {
-      console.log(keyPress.current)
+      console.log(e.key)
       if(e.key === 'Enter') {
+        keyPress.current.focus()
+        console.log(keyPress)
         clickIt()
-        return () => console.log('test')
       }
     })
   },[])
+
+  const formattedOperand = formatOperand(operand)
 
   return (
     <>
     <div className='calculator-container'>
       <div className='output'>
-        <div className='operand'>{formatOperand(operand)}</div>
+        <div className='operand'>{formattedOperand}</div>
       </div>
       <ChangeOperandButton className='light-gray' action='AC' dispatch={dispatch} />
       <ChangeOperandButton className='light-gray' action='+/-' dispatch={dispatch} />
