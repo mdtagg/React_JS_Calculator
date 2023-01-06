@@ -80,7 +80,14 @@ body {
 }
 
 .light-gray {
-  background-color:rgb(172, 170, 170)
+  background-color:rgb(172, 170, 170);
+  color:black;
+}
+
+.light-gray:hover,
+.light-gray:focus {
+  background-color: white;
+  color:black;
 }
 
 .orange {
@@ -88,6 +95,7 @@ body {
   color:white;
 }
 
+.orange:hover,
 .orange:focus {
   background-color:white;
   color:rgb(251, 164, 2)
@@ -98,6 +106,7 @@ body {
   color:white;
 }
 
+.dark-gray:hover,
 .dark-gray:focus {
   background-color:white;
   color:rgb(69, 69, 69)
