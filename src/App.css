@@ -28,6 +28,7 @@ body {
     margin:0;
     grid-template-rows:minmax(2rem,auto) repeat(5,6rem);
     grid-template-columns: repeat(4,auto);
+    gap:1rem;
   }
 } 
 
@@ -53,14 +54,12 @@ body {
 
 .calculator-container {
   display:grid;
-  /* grid-template-columns: repeat(4,auto); */
   background-color:black;
-  /* padding:1rem; */
+  padding:1rem;
 }
 
 .calculator-container > button {
   border-radius:100%;
-  /* margin:.4rem; */
   font-size:2rem;
   cursor:pointer;
   border:none;
