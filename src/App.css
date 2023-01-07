@@ -11,6 +11,7 @@ body {
 
 @media only screen and (max-width:600px) {
   .calculator-container {
+    background-color:blue;
     height:844px;
     width:390px;
     margin:0;
@@ -20,6 +21,7 @@ body {
 
 @media only screen and (orientation:landscape) and (max-width:600px) {
   .calculator-container {
+    background-color:pink;
     height:100vh;
     width:100vw;
     grid-template-rows: minmax(1.5rem,auto) repeat(5,3.5rem);
@@ -30,6 +32,7 @@ body {
 
 @media only screen and (min-width:700px) {
   .calculator-container {
+    background-color:yellow;
     height:90vh;
     width:26vw;
     margin-top:2rem;
@@ -43,7 +46,7 @@ body {
 .calculator-container {
   display:grid;
   grid-template-columns: repeat(4,auto);
-  background-color:black;
+  /* background-color:black; */
   padding:1rem;
 }
 
