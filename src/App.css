@@ -12,8 +12,8 @@ body {
 @media only screen and (max-width:600px) {
   .calculator-container {
     background-color:blue;
-    height:844px;
-    width:390px;
+    height:100vh;
+    width:100vw;
     margin:0;
     grid-template-rows:minmax(2rem,auto) repeat(5,6rem);
   }
