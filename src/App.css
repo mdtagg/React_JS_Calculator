@@ -12,12 +12,12 @@ body {
 
 @media only screen and (max-width:600px) {
   .calculator-container {
-    height:100vh;
+    height:100dvh;
     width:100vw;
     margin:0;
     grid-template-rows:minmax(2rem,auto) repeat(5,6rem);
     grid-template-columns: repeat(4,auto);
-    gap:1rem;
+    /* gap:1rem; */
   }
 }
 
