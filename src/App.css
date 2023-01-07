@@ -2,13 +2,6 @@
   box-sizing: border-box;
 }
 
-body {
-  margin:0;
-  background-color:rgb(88, 88, 88);
-  display:flex;
-  justify-content: center;
-}
-
 @media only screen and (max-width:600px) {
   .calculator-container {
     height:100dvh;
@@ -32,6 +25,13 @@ body {
 
 
 @media only screen and (min-width:700px) {
+  body {
+    margin:0;
+    background-color:rgb(88, 88, 88);
+    display:flex;
+    justify-content: center;
+  }
+  
   .calculator-container {
     height:90vh;
     width:26vw;
