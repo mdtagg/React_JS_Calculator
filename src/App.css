@@ -11,21 +11,22 @@ body {
 
 @media only screen and (max-width:600px) {
   .calculator-container {
-    height:100vh;
-    width:100vw;
+    height:844px;
+    width:390px;
     margin:0;
     grid-template-rows:minmax(2rem,auto) repeat(5,6rem);
   }
 }
 
-@media only screen and (orientation:landscape) and (max-width:600px) {
+/* @media only screen and (orientation:landscape) and (max-width:600px) {
   .calculator-container {
     height:100vh;
     width:100vw;
     grid-template-rows: minmax(1.5rem,auto) repeat(5,3.5rem);
     margin:0;
   }
-}
+} 
+*/
 
 @media only screen and (min-width:700px) {
   .calculator-container {
@@ -37,7 +38,7 @@ body {
     border-radius:3rem;
     grid-template-rows:minmax(2rem,auto) repeat(5,6rem);
   }
-}
+} 
 
 .calculator-container {
   display:grid;
@@ -51,6 +52,7 @@ body {
   margin:5px;
   font-size:2rem;
   cursor:pointer;
+  border:none;
 }
 
 .calculator-container > button:hover {
