@@ -1,5 +1,6 @@
 *,*::after,*::before {
   box-sizing: border-box;
+  margin:0;
 }
 
 @media only screen and (max-width:600px) {
@@ -31,7 +32,7 @@
     display:flex;
     justify-content: center;
   }
-  
+
   .calculator-container {
     height:90vh;
     width:26vw;
