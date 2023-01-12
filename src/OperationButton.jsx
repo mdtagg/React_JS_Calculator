@@ -1,7 +1,7 @@
 import { ACTIONS } from './App'
 import { useRef,useEffect } from 'react'
 
-function ChooseOperation({operation,dispatch,className}) {
+function OperationButton({operation,dispatch,className}) {
 
 const keyPress = useRef()
 const clickIt = () => keyPress.current.click()
@@ -28,4 +28,4 @@ useEffect(() => {
     )
     }
 
-export default ChooseOperation
+export default OperationButton
