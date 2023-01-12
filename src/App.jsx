@@ -91,7 +91,7 @@ function reducer(state,{type,payload}) {
       }
   }
 }
-
+//changes operand to either switch to positive or negative value or change to a percentage
 function changeOperand({operand},payload) {
   let newOperand = parseFloat(operand)
   switch(payload) {
@@ -102,6 +102,7 @@ function changeOperand({operand},payload) {
   }
 }
 
+//calculates the full operation and fixes the result to 9 places or 2 depending on size 
 function evaluate({operand,previousOperand,operation}) {
   let prev = parseFloat(previousOperand)
   let currentOperand = parseFloat(operand)
