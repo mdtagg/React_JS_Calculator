@@ -136,10 +136,8 @@ function App() {
 
   useEffect(() => {
     window.addEventListener('keydown', e => {
-      console.log(e.key)
       if(e.key === 'Enter') {
         keyPress.current.focus()
-        console.log(keyPress)
         clickIt()
       }
     })
