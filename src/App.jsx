@@ -96,6 +96,7 @@ function evaluate({operand,previousOperand,operation}) {
   let result = 0
   switch(operation) {
     case '÷':
+      //floating decimal bug 
       result = prev / currentOperand
       break
     case '+':
@@ -106,6 +107,7 @@ function evaluate({operand,previousOperand,operation}) {
       break
     case 'x':
       result = prev * currentOperand
+      result = result.toFixed(2)
       break
   }
   if(result.toString().length > 9 && !result.toString().includes('.')) {
@@ -119,7 +121,7 @@ const INTEGER_FORMATTER = new Intl.NumberFormat('en-us', {
 })
 
 function formatOperand(operand) {
-  console.log('operand',operand)
+  // console.log('operand',operand)
   if(operand === 'Error') return 'Error'
   if(operand == null) return 
   let [integer,decimal] = operand.split('.')
