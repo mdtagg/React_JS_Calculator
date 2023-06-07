@@ -14,6 +14,7 @@ export const ACTIONS = {
 function reducer(state,{type,payload}) {
   switch(type) {
     case ACTIONS.ADD_DIGIT:
+      
       //operand is changed to 0. if user inputs a decimal number without a leading integer
       if(state.operand == null && payload.digit === '.') {
         return {
@@ -21,6 +22,21 @@ function reducer(state,{type,payload}) {
           operand: `0.`
         }
       }
+
+      //if negative is true on the state then the operand is 
+      //turned to a negative
+      if(state.negative) {
+        console.log(state)
+        let newOperand = parseInt(state.operand) * -1
+        newOperand = newOperand.toString()
+        return {
+          ...state,
+          previousOperand:state.operand,
+          operand:newOperand,
+          negative:false,
+        }
+      }
+      
       //overwrites purpose is to update the operand state to the first digit pressed after a calculation has been executed
       //if a number is divided by 0 the operand will be 'error' after the calculation
       if(state.overwrite || state.operand === 'Error') {
@@ -46,7 +62,7 @@ function reducer(state,{type,payload}) {
         operand: `${state.operand || ''}${payload.digit}`,
       }
     case ACTIONS.CHOOSE_OPERATION:
-      //if chaining operations operand state is updated to the calculation of the previous and current operand, overwrite is updated to
+      //if chaining operations, operand state is updated to the calculation of the previous and current operand, overwrite is updated to
       //to true so that the next digit updates the operand to next digit pressed, operation is updated to the next operation in the 
       //chain and previous operand is reset to null
       if(state.previousOperand != null && state.operand != null) {
@@ -56,6 +72,25 @@ function reducer(state,{type,payload}) {
           operand: evaluate(state),
           operation: payload.operation,
           previousOperand: null
+        }
+      }
+      // if - is pressed after an operation has already been pressed
+      //negative true is added to state
+      if(payload.operation !== '-' && state.operation !== '-') {
+        return {
+          ...state,
+          overwrite:true,
+          operation:payload.operation,
+          negative:false
+        }
+      }
+
+      if(payload.operation === '-' && (state.operation !== "-" && state.operation !== undefined)) {
+        return {
+          ...state,
+          overwrite:false,
+          operation:state.operation,
+          negative:true
         }
       }
       //if operations are not chained, the equals button is pressed and then an operation button is pressed before a digit is input then \
@@ -176,28 +211,28 @@ function App() {
   return (
     <>
     <div className='calculator-container'>
-      <div className='output'>
+      <div id="display" className='output'>
         <div className='operand'>{formattedOperand}</div>
       </div>
-      <ChangeOperandButton className='light-gray' action='AC' dispatch={dispatch} />
+      <ChangeOperandButton className='light-gray' id="clear" action='AC' dispatch={dispatch} />
       <ChangeOperandButton className='light-gray' action='+/-' dispatch={dispatch} />
       <ChangeOperandButton className='light-gray' action='%' dispatch={dispatch} />
-      <OperationButton className='orange' operation='÷' dispatch={dispatch} />
-      <DigitButton className='dark-gray' digit='7' dispatch={dispatch} />
-      <DigitButton className='dark-gray' digit='8' dispatch={dispatch} />
-      <DigitButton className='dark-gray' digit='9' dispatch={dispatch} />
-      <OperationButton className='orange' operation='x' dispatch={dispatch} />
-      <DigitButton className='dark-gray' digit='4' dispatch={dispatch} />
-      <DigitButton className='dark-gray' digit='5' dispatch={dispatch} />
-      <DigitButton className='dark-gray' digit='6' dispatch={dispatch} />
-      <OperationButton className='orange' operation='-' dispatch={dispatch} />
-      <DigitButton className='dark-gray' digit='1' dispatch={dispatch} />
-      <DigitButton className='dark-gray' digit='2' dispatch={dispatch} />
-      <DigitButton className='dark-gray' digit='3' dispatch={dispatch} />
-      <OperationButton className='orange' operation='+' dispatch={dispatch} />
-      <DigitButton className='span-two dark-gray' digit='0' dispatch={dispatch} />
-      <DigitButton className='dark-gray' digit='.' dispatch={dispatch} />
-      <button ref={keyPress} className='orange' onClick={() => dispatch({type:ACTIONS.EVALUATE})}>=</button>
+      <OperationButton className='orange' id="divide" operation='÷' dispatch={dispatch} />
+      <DigitButton className='dark-gray' id="seven" digit='7' dispatch={dispatch} />
+      <DigitButton className='dark-gray' id="eight" digit='8' dispatch={dispatch} />
+      <DigitButton className='dark-gray' id="nine" digit='9' dispatch={dispatch} />
+      <OperationButton className='orange' id="multiply" operation='x' dispatch={dispatch} />
+      <DigitButton className='dark-gray' id="four" digit='4' dispatch={dispatch} />
+      <DigitButton className='dark-gray' id="five" digit='5' dispatch={dispatch} />
+      <DigitButton className='dark-gray' id="six" digit='6' dispatch={dispatch} />
+      <OperationButton className='orange' id="subtract" operation='-' dispatch={dispatch} />
+      <DigitButton className='dark-gray' id="one" digit='1' dispatch={dispatch} />
+      <DigitButton className='dark-gray' id="two" digit='2' dispatch={dispatch} />
+      <DigitButton className='dark-gray' id="three" digit="3" dispatch={dispatch} />
+      <OperationButton className='orange' id="add" operation='+' dispatch={dispatch} />
+      <DigitButton className='span-two dark-gray' id="zero" digit='0' dispatch={dispatch} />
+      <DigitButton className='dark-gray' id="decimal" digit='.' dispatch={dispatch} />
+      <button id="equals" ref={keyPress} className='orange' onClick={() => dispatch({type:ACTIONS.EVALUATE})}>=</button>
     </div>
     </>
     

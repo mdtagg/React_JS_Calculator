@@ -1,7 +1,7 @@
 import { ACTIONS } from './App'
 import { useRef,useEffect } from 'react'
 
-function OperationButton({operation,dispatch,className}) {
+function OperationButton({operation,dispatch,className,id}) {
 //the keyPress button is set to the element button that was pressed
 const keyPress = useRef()
 const clickIt = () => keyPress.current.click()
@@ -22,9 +22,10 @@ useEffect(() => {
     
     return (
         <button 
-        ref={keyPress}
-        className={className}
-        onClick={() => dispatch({type:ACTIONS.CHOOSE_OPERATION,payload:{operation}})}
+            ref={keyPress}
+            className={className}
+            onClick={() => dispatch({type:ACTIONS.CHOOSE_OPERATION,payload:{operation}})}
+            id={id}
         >
             {operation}
         </button>
