@@ -16,8 +16,6 @@ function DigitButton({digit,dispatch,className,id}) {
         })
     },[])
 
-    //when the button is clicked the dispatch function is called which sends the props information 
-    //to the reducer function in the app component 
     return (
         <button 
             ref={keyPress}
